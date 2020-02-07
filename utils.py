@@ -1,11 +1,14 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-import cv2, sys, os, rawpy
-from PIL import Image
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+import os
+import sys
+
+import cv2
 import numpy as np
+import rawpy
 import scipy.stats as stats
+from PIL import Image
 
 ######### Local Vars
 FOCAL_CODE = 37386

@@ -1,13 +1,13 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+from __future__ import absolute_import, division, print_function
 
 import sys
-sys.path.append(".")
-sys.path.append("..")
 
 import tensorflow as tf
 import tensorflow.contrib.slim as slim
+
+sys.path.append(".")
+sys.path.append("..")
+
 
 # Define the convolution building block
 def conv2(batch_input, kernel=3, output_channel=64, stride=1, use_bias=True, scope='conv'):

@@ -1,10 +1,14 @@
+import glob
+import os
+
+import numpy as np
+import tensorflow as tf
 import yaml
 from PIL import Image
-import tensorflow as tf
-import glob, os
-import numpy as np
+
 import net as net
 import utils as utils
+
 
 def main():
   config_file_path = "config/inference.yaml"
