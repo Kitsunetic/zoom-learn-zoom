@@ -152,6 +152,7 @@ def add_noise(im):
 
 ### CHECK
 def get_bayer(path, black_lv, white_lv):
+    """raw 이미지를 읽고 black/white level value를 통해 normalization한다."""
     try:
         raw = rawpy.imread(path)
     except:
@@ -161,14 +162,16 @@ def get_bayer(path, black_lv, white_lv):
     return bayer
 
 def reshape_raw(bayer):
-    bayer = np.expand_dims(bayer,axis=2) 
+    """1채널인 RAW데이터를 4채널의 이미지로 변환 (W, H) -> (W/2, H/2, 4)"""
+    bayer = np.expand_dims(bayer, axis=2) 
     bayer_shape = bayer.shape
     H = bayer_shape[0]
     W = bayer_shape[1]
-    reshaped = np.concatenate((bayer[0:H:2,0:W:2,:], 
-                       bayer[0:H:2,1:W:2,:],
-                       bayer[1:H:2,1:W:2,:],
-                       bayer[1:H:2,0:W:2,:]), axis=2)
+    reshaped = np.concatenate((
+        bayer[0:H:2, 0:W:2,:], 
+        bayer[0:H:2, 1:W:2,:],
+        bayer[1:H:2, 1:W:2,:],
+        bayer[1:H:2, 0:W:2,:]), axis=2)
     return reshaped
 
 def reshape_back_raw(bayer):
@@ -210,6 +213,8 @@ def crop_fov(image, ratio):
 
 ### CHECK
 def crop_fov_free(image, ratio, crop_fracx=1./2, crop_fracy=1./2):
+    """입력된 이미지의 중앙 부분을 crop.
+    crop_fracx, crop_fracy가 기본값인 0.5일 경우, 상하좌우 1/4씩을 crop하고, 중앙에 남은 부분만 추출"""
     width, height = image.shape[:2]
     new_width = width * ratio
     new_height = height * ratio
