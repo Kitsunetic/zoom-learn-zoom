@@ -11,7 +11,7 @@ model:
 
 io:
   inference_root: './quick_inference/'  # if 'mode' is 'inference_single'
-  inference_path: './quick_inference/00134.ARW' # if 'mode' is 'inference'
+  inference_path: './quick_inference/00169.ARW' # if 'mode' is 'inference'
   fracx: 0.5  # x-fraciton of the cropped region, 0.5 would be the x-center
   fracy: 0.5  # y-fraciton of the cropped region, 0.5 would be the y-center
   restore_ckpt: './model' # this folder contains checkpoint
