@@ -114,6 +114,10 @@ def main():
               print("white balance txt not exist, reading from raw EXIF data ... ")
               out_wb = utils.compute_wb(inference_path)
 
+            #print(out_wb)
+            #exit()
+            #[[0.77082597 0.9585367  0.9585367  1.2676544 ]]
+
             input_bayer = utils.get_bayer(inference_path, black_lv, white_lv)
             #print('inference_path:', inference_path)
             #print('inference_path:', black_lv)
@@ -130,14 +134,14 @@ def main():
             inference_path: 16383
             input_bayer: (2848, 4256) --> 원본 RAW 이미지 사이즈(1채널) 인 듯함
             """
-            input_raw_reshape = utils.reshape_raw(input_bayer)
+            input_raw_reshape = utils.reshape_raw(input_bayer) # ARW 파일 -> 4채널로 변경
             input_raw_img_orig = utils.crop_fov_free(input_raw_reshape, 1./crop_ratio, crop_fracx=fracx, crop_fracy=fracy)
 
             # loss 계산을 위해 GroundTruth JPG 파일을 읽는다.
             rgb_camera_path = inference_path.replace(".ARW", ".JPG")
             rgb_camera =  np.array(Image.open(rgb_camera_path))
             cropped_input_rgb = utils.crop_fov_free(rgb_camera, 1./crop_ratio, crop_fracx=fracx, crop_fracy=fracy)
-            cropped_input_rgb = utils.image_float(cropped_input_rgb)
+            cropped_input_rgb = utils.image_float(cropped_input_rgb) # JPG 파일
 
             print("Testing on image : %s"%(inference_path), input_raw_img_orig.shape)
 

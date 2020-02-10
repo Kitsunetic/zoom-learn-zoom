@@ -219,7 +219,7 @@ def crop_fov_free(image, ratio, crop_fracx=1./2, crop_fracy=1./2):
     """입력된 이미지의 중앙 부분을 crop.
     crop_fracx, crop_fracy가 기본값인 0.5일 경우, 상하좌우 1/4씩을 crop하고, 중앙에 남은 부분만 추출"""
     width, height = image.shape[:2]
-    new_width = width * ratio
+    new_width = width * ratio # 기본값 1/8
     new_height = height * ratio
     left = np.ceil((width - new_width) * crop_fracx)
     top = np.ceil((height - new_height) * crop_fracy)
